@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>1. Basic</title>
+        <link type="text/css" href="https://cdn.rawgit.com/nhnent/tui.color-picker/v2.0.0/dist/tui-color-picker.css" rel="stylesheet">
+        <link type="text/css" href="css/service-basic.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="body-container">
+            <div class="tui-image-editor-controls">
+                <div class="header">
+                    <span class="name"> Editor de Imagem </span>
+                    <ul class="menu">
+                        <li class="menu-item border input-wrapper">
+                            Carregar
+                            <input type="file" accept="image/*" id="input-image-file">
+                        </li>
+                        <li class="menu-item border" id="btn-download">Download</li>
+                    </ul>
+                </div>
+                <ul class="menu">
+                    <li class="menu-item disabled" id="btn-undo">Desfazer</li>
+                    <li class="menu-item disabled" id="btn-redo">Refazer</li>
+                    <li class="menu-item" id="btn-clear-objects">Limpar Objetos</li>
+                    <li class="menu-item" id="btn-remove-active-object">Remover Objetos Ativos</li>
+                    <li class="menu-item" id="btn-crop">Cortar</li>
+                    <li class="menu-item" id="btn-flip">Girar</li>
+                    <li class="menu-item" id="btn-rotation">Rotacionar</li>
+                    <li class="menu-item" id="btn-draw-line">Desenhar</li>
+                    <li class="menu-item" id="btn-draw-shape">Shape</li>
+                    <li class="menu-item" id="btn-add-icon">Icones</li>
+                    <li class="menu-item" id="btn-text">Texto</li>
+                    <li class="menu-item" id="btn-mask-filter">Mascara</li>
+                    <li class="menu-item" id="btn-image-filter">Filtro</li>
+                </ul>
+                <div class="sub-menu-container" id="crop-sub-menu">
+                    <ul class="menu">
+                        <li class="menu-item" id="btn-apply-crop">Aplicar</li>
+                        <li class="menu-item" id="btn-cancel-crop">Cancelar</li>
+                    </ul>
+                </div>
+                <div class="sub-menu-container" id="flip-sub-menu">
+                    <ul class="menu">
+                        <li class="menu-item" id="btn-flip-x">FlipX</li>
+                        <li class="menu-item" id="btn-flip-y">FlipY</li>
+                        <li class="menu-item" id="btn-reset-flip">Resetar</li>
+                        <li class="menu-item close">Fechar</li>
+                    </ul>
+                </div>
+                <div class="sub-menu-container" id="rotation-sub-menu">
+                    <ul class="menu">
+                        <li class="menu-item" id="btn-rotate-clockwise">Sentido Horario(30)</li>
+                        <li class="menu-item" id="btn-rotate-counter-clockwise">Sentido Antihorario(-30)</li>
+                        <li class="menu-item no-pointer"><label>Entrada do Intervalo<input id="input-rotation-range" type="range" min="-360" value="0" max="360"></label></li>
+                        <li class="menu-item close">Fechar</li>
+                    </ul>
+                </div>
+                <div class="sub-menu-container menu" id="draw-line-sub-menu">
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <label><input type="radio" name="select-line-type" value="freeDrawing" checked="checked"> Desenho Livre</label>
+                            <label><input type="radio" name="select-line-type" value="lineDrawing"> Linha Reta</label>
+                        </li>
+                        <li class="menu-item">
+                            <div id="tui-brush-color-picker">Brush cor</div>
+                        </li>
+                        <li class="menu-item"><label class="menu-item no-pointer">Brush tamanho<input id="input-brush-width-range" type="range" min="5" max="30" value="12"></label></li>
+                        <li class="menu-item close">Fechar</li>
+                    </ul>
+                </div>
+                <div class="sub-menu-container" id="draw-shape-sub-menu">
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <label><input type="radio" name="select-shape-type" value="rect" checked="checked"> Retangulo</label>
+                            <label><input type="radio" name="select-shape-type" value="circle"> Circulo</label>
+                            <label><input type="radio" name="select-shape-type" value="triangle"> Triangulo</label>
+                        </li>
+                        <li class="menu-item">
+                            <select name="select-color-type">
+                                <option value="fill">Preencher</option>
+                                <option value="stroke">Stroke</option>
+                            </select>
+                            <label><input type="checkbox" id="input-check-transparent">Transparente</label>
+                            <div id="tui-shape-color-picker"></div>
+                        </li>
+                        <li class="menu-item"><label class="menu-item no-pointer">Stroke tamanho<input id="input-stroke-width-range" type="range" min="0" max="300" value="12"></label></li>
+                        <li class="menu-item close">Fechar</li>
+                    </ul>
+                </div>
+                <div class="sub-menu-container" id="icon-sub-menu">
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <div id="tui-icon-color-picker">Icone cor</div>
+                        </li>
+                        <li class="menu-item border" id="btn-register-icon">Registre Icone Personalizado</li>
+                        <li class="menu-item icon-text" data-icon-type="arrow">➡</li>
+                        <li class="menu-item icon-text" data-icon-type="cancel">✖</li>
+                        <li class="menu-item close">Fechar</li>
+                    </ul>
+                </div>
+                <div class="sub-menu-container" id="text-sub-menu">
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <div>
+                                <button class="btn-text-style" data-style-type="b">Negrito</button>
+                                <button class="btn-text-style" data-style-type="i">Italico</button>
+                                <button class="btn-text-style" data-style-type="u">Sublinhado</button>
+                            </div>
+                            <div>
+                                <button class="btn-text-style" data-style-type="l">Esquerda</button>
+                                <button class="btn-text-style" data-style-type="c">Centro</button>
+                                <button class="btn-text-style" data-style-type="r">Direita</button>
+                            </div>
+                        </li>
+                        <li class="menu-item"><label class="no-pointer"><input id="input-font-size-range" type="range" min="10" max="100" value="10"></label></li>
+                        <li class="menu-item">
+                            <div id="tui-text-color-picker">Texto cor</div>
+                        </li>
+                        <li class="menu-item close">Fechar</li>
+                    </ul>
+                </div>
+                <div class="sub-menu-container" id="filter-sub-menu">
+                    <ul class="menu">
+                        <li class="menu-item border input-wrapper">
+                            Carregar Mascara na Imagem
+                            <input type="file" accept="image/*" id="input-mask-image-file">
+                        </li>
+                        <li class="menu-item" id="btn-apply-mask">Aplicar filtro de mascara</li>
+                        <li class="menu-item close">Fechar</li>
+                    </ul>
+                </div>
+                <div class="sub-menu-container" id="image-filter-sub-menu">
+                    <ul class="menu">
+                        <li class="menu-item align-left-top">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td><label><input type="checkbox" id="input-check-grayscale">Escala de Cinza</label></td>
+                                        <td><label><input type="checkbox" id="input-check-invert">Inverter</label></td>
+                                        <td><label><input type="checkbox" id="input-check-sepia">Sepia</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label><input type="checkbox" id="input-check-sepia2">Sepia2</label></td>
+                                        <td><label><input type="checkbox" id="input-check-blur">Embaçar</label></td>
+                                        <td><label><input type="checkbox" id="input-check-sharpen">Aguçar</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label><input type="checkbox" id="input-check-emboss">Relevo</label></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li class="menu-item align-left-top">
+                            <p>
+                                <label><input type="checkbox" id="input-check-remove-white">Remover Claridade</label><br>
+                                <label>Limite<input class="range-narrow" id="input-range-remove-white-threshold" type="range" min="0" value="60" max="255"></label><br>
+                                <label>Distancia<input class="range-narrow" id="input-range-remove-white-distance" type="range" min="0" value="10" max="255"></label>
+                            </p>
+                        </li>
+                        <li class="menu-item align-left-top">
+                            <p>
+                                <label><input type="checkbox" id="input-check-brightness">Brilho</label><br>
+                                <label>Valor<input class="range-narrow" id="input-range-brightness-value" type="range" min="-255" value="100" max="255"></label>
+                            </p>
+                        </li>
+                        <li class="menu-item align-left-top">
+                            <p>
+                                <label><input type="checkbox" id="input-check-noise">Ruído</label><br>
+                                <label>Valor<input class="range-narrow" id="input-range-noise-value" type="range" min="0" value="100" max="1000"></label>
+                            </p>
+                        </li>
+                        <li class="menu-item align-left-top">
+                            <p>
+                                <label><input type="checkbox" id="input-check-gradient-transparancy">Gradiente - Transparencia</label><br>
+                                <label>Valor<input class="range-narrow" id="input-range-gradient-transparency-value" type="range" min="0" value="100" max="255"></label>
+                            </p>
+                        </li>
+                        <li class="menu-item align-left-top">
+                            <p>
+                                <label><input type="checkbox" id="input-check-pixelate">Pixelate</label><br>
+                                <label>Valor<input class="range-narrow" id="input-range-pixelate-value" type="range" min="2" value="4" max="20"></label>
+                            </p>
+                        </li>
+                        <li class="menu-item align-left-top">
+                            <p>
+                                <label><input type="checkbox" id="input-check-tint">Matiz</label><br>
+                                <div id="tui-tint-color-picker"></div>
+                                <label>Opacidade<input class="range-narrow" id="input-range-tint-opacity-value" type="range" min="0" value="1" max="1" step="0.1"></label>
+                            </p>
+                        </li>
+                        <li class="menu-item align-left-top">
+                            <p>
+                                <label><input type="checkbox" id="input-check-multiply">Multiplicar</label>
+                                <div id="tui-multiply-color-picker"></div>
+                            </p>
+                        </li>
+                        <li class="menu-item align-left-top">
+                            <p>
+                                <label><input type="checkbox" id="input-check-blend">Misturar</label>
+                                <div id="tui-blend-color-picker"></div>
+                                <select name="select-blend-type">
+                                    <option value="add" selected>Adicionar</option>
+                                    <option value="diff">Diferença</option>
+                                    <option value="diff">Subtrair</option>
+                                    <option value="multiply">Multiplicar</option>
+                                    <option value="screen">Tela</option>
+                                    <option value="lighten">Luminosidade</option>
+                                    <option value="darken">Escuridão</option>
+                                </select>
+                            </p>
+                        </li><li class="menu-item align-left-top">
+                            <p>
+                                <label><input type="checkbox" id="input-check-color-filter">ColorFilter</label><br>
+                                <label>Limite<input class="range-narrow" id="input-range-color-filter-value" type="range" min="0" value="45" max="255"></label>
+                            </p>
+                        </li>
+                        <li class="menu-item close">Fechar</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tui-image-editor"></div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.7/fabric.js"></script>
+        <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.3.0/tui-code-snippet.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/nhnent/tui.component.colorpicker/1.0.2/dist/colorpicker.min.js"></script>
+        <script type="text/javascript" src="js/tui-image-editor.js"></script>
+        <script src="js/service-basic.js"></script>
+    </body>
+</html>
