@@ -55,6 +55,10 @@ var $btnAddLocationIcon = $('#btn-add-location-icon');
 var $btnAddHeartIcon = $('#btn-add-heart-icon');
 var $btnAddBubbleIcon = $('#btn-add-bubble-icon')
 var $btnAddCustomIcon = $('#btn-add-custom-icon');
+var $btnAddFacebookIcon = $('#btn-add-facebook-icon');
+var $btnAddEmailIcon = $('#btn-add-email-icon');
+var $btnAddBehanceIcon = $('#btn-add-behance-icon');
+var $btnAddFlickrIcon = $('#btn-add-flickr-icon');
 var $btnFreeDrawing = $('#btn-free-drawing');
 var $btnLineDrawing = $('#btn-line-drawing');
 var $btnAddRect = $('#btn-add-rect');
@@ -73,7 +77,7 @@ var $selectFontFamily = document.getElementById("font-family");
 
 // Colorpicker
 var iconColorpicker = tui.component.colorpicker.create({
-    container: $('#tui-icon-color-picker')[0],
+    container: $('.tui-icon-color-picker')[0],
     color: '#000000'
 });
 
@@ -97,7 +101,7 @@ var imageEditor = new tui.ImageEditor('.tui-image-editor', {
     cssMaxWidth: document.documentElement.clientWidth,
     cssMaxHeight: document.documentElement.clientHeight,
     selectionStyle: {
-        cornerSize: 50,
+        cornerSize: 10,
         rotatingPointOffset: 100
     }
 });
@@ -403,6 +407,23 @@ $btnAddLocationIcon.on('click', function(){
     imageEditor.addIcon('location');
 });
 
+$btnAddFacebookIcon.on('click', function(){
+    imageEditor.addIcon('facebook');
+});
+
+$btnAddEmailIcon.on('click', function(){
+    imageEditor.addIcon('email');
+});
+
+$btnAddFlickrIcon.on('click', function(){
+    imageEditor.addIcon('flickr');
+});
+
+$btnAddBehanceIcon.on('click', function(){
+    imageEditor.addIcon('behance');
+});
+
+
 $btnAddHeartIcon.on('click', function(){
     imageEditor.addIcon('heart');
 });
@@ -482,9 +503,6 @@ fonts.forEach(function(font) {
   $selectFontFamily.onchange = function(){
     loadAndUse(this.value)
     console.log(this.value)
-    /*imageEditor.changeTextStyle(activeObjectId, {
-        fontFamily: toString((this.value))
-    })*/
     function loadAndUse(font) {
         var myfont = new FontFaceObserver(font)
         myfont.load()
@@ -500,26 +518,6 @@ fonts.forEach(function(font) {
       }  
 }
 
-  /*$selectFontFamily.onchange = function(){
-    if (this.value != null){
-        loadAndUse(this.value);
-    }else{
-        imageEditor.getActiveObject().set("fontFamily", this.value);
-        imageEditor.renderAll();
-    }
-}
-function loadAndUse(font) {
-    var myfont = new FontFaceObserver(font)
-    myfont.load()
-      .then(function() {
-        // quando a fonte é carregada, use-a.
-        imageEditor.getActiveObject().set("fontFamily", font);
-        imageEditor.renderAll();
-      }).catch(function(e) {
-        console.log(e)
-        alert('Carregamento da fonte '+font+ ' falhou');
-      });
-  }  */
 
 textColorpicker.on('selectColor', function(event) {
     imageEditor.changeTextStyle(activeObjectId, {

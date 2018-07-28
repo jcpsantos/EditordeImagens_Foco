@@ -9,7 +9,7 @@
         <link type="text/css" href="css/service-mobile.css" rel="stylesheet">
     </head>
     <body>
-        <!-- Image editor controls - top area -->
+        <!-- Controles do editor de imagem - área superior -->
         <div class="header">
             <div>
                 <span class="name">Editor de Imagem</span>
@@ -25,9 +25,9 @@
                 <button class="button" id="btn-download"><img src="img/download.png" /></button>
             </div>
         </div>
-        <!-- Image editor area -->
+        <!-- Área do editor de imagens -->
         <div class="tui-image-editor"></div>
-        <!-- Image editor controls - bottom area -->
+        <!-- Controles do editor de imagem - área inferior -->
         <div class="tui-image-editor-controls">
             <ul class="scrollable">
                 <li class="menu-item">
@@ -132,7 +132,7 @@
                             <li class="menu-item">
                                 <button class="submenu-button" id="btn-change-icon-color">Cor</button>
                                 <div class="hiddenmenu">
-                                    <div id="tui-icon-color-picker"></div>
+                                    <div class="tui-icon-color-picker"></div>
                                 </div>
                             </li>
                         </ul>
@@ -212,6 +212,24 @@
                     </div>
                 </li>
                 <li class="menu-item">
+                    <button class="menu-button">Icone <br> Redes <br> Sociais</button>
+                    <div class="submenu">
+                        <button class="btn-prev">&lt;</button>
+                        <ul class="scrollable">
+                            <li class="menu-item"><button class="submenu-button" id="btn-add-behance-icon">Behance</button></li>
+                            <li class="menu-item"><button class="submenu-button" id="btn-add-email-icon">Email</button></li>
+                            <li class="menu-item"><button class="submenu-button" id="btn-add-facebook-icon">Facebook</button></li>
+                            <li class="menu-item"><button class="submenu-button" id="btn-add-flickr-icon">Flickr</button></li>
+                            <li class="menu-item">
+                                <button class="submenu-button" id="btn-change-icon-color">Cor</button>
+                                <div class="hiddenmenu">
+                                    <div class="tui-icon-color-picker"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item">
                     <button class="menu-button">Mascara</button>
                     <div class="submenu">
                         <button class="btn-prev">&lt;</button>
@@ -229,7 +247,7 @@
                     </div>
                 </li>
             </ul>
-            <p class="msg">Menu Scroll <b>Esquerda ⇔ Direita</b></p>
+            <!--<p class="msg">Menu Scroll <b>Esquerda ⇔ Direita</b></p>-->
         </div>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.7/fabric.js"></script>
         <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.3.0/tui-code-snippet.min.js"></script>
