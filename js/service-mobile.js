@@ -641,7 +641,7 @@ shapeColorpicker.on('selectColor', function(event) {
 });
 
 //Carregar imagem de recorte e aplicação de mascara/filtro
-var $btnLoadMaskImage = $('#input-mask-image-file');
+var $btnLoadMaskImage = $('.input-mask-image-file');
 var $btnApplyMask = $('#btn-apply-mask');
 $btnLoadMaskImage.on('change', function() {
     var file;
@@ -671,7 +671,9 @@ $btnApplyMask.on('click', function() {
     }).then(result => {
         console.log(result);
     });
+    
 });
+
 
 //Aplicação de filtros na imagem
 var $inputCheckGrayscale = $('#input-check-grayscale');
@@ -719,6 +721,14 @@ $inputCheckEmboss.on('change', function() {
 });
 
 // Carregar imagem de amostra
-imageEditor.loadImageFromURL('https://www.saturdaydownsouth.com/wp-content/uploads/2016/04/IMG-Academy-81sCA5.jpg', 'SampleImage').then(() => {
+imageEditor.loadImageFromURL('https://img.grouponcdn.com/deal/vxBsDT2N6jdB4bHKZrzy2yfjkfq/vx-2048x1229/v1/c700x420.jpg', 'SampleImage').then(() => {
     imageEditor.clearUndoStack();
 });
+
+//img
+window.onload = function() {
+    var canvas = document.getElementById("img1");
+    var ctx = canvas.getContext("2d");
+    var img = document.getElementById("tour1");
+   ctx.drawImage(img, 0, 0);
+};

@@ -202,3 +202,7 @@ input[type=file] {
 .tui-image-editor-controls .msg.hide {
     display: none;
 }
+
+.teste{
+    margin-top: -70vh;
+}
